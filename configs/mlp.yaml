@@ -1,0 +1,10 @@
+model: mlp
+layers: [784, 256, 128, 10]
+optimizer: {name: sgd, lr: 0.1, momentum: 0.9}
+batch_size: 128
+normalize: {mean: 0.1307, std: 0.3081}   # training-set pixel mean/std (tests/test_data.py)
+log_every: 50
+epochs: 20
+amp: true
+seed: 0
+weight_delta: {every: 100, lags: [100, 500]}   # log sum |w - w_lag_steps_ago| (D8)

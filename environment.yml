@@ -1,0 +1,33 @@
+# Shared Python environment for mnist-showcase and ml-workbench.
+#   micromamba create -f environment.yml
+#   micromamba run -n mnist-showcase pip install --no-deps -e . -e ../ml-workbench
+name: mnist-showcase
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  # ML (pytorch-gpu ships its own CUDA runtime; only the NVIDIA driver is needed)
+  - pytorch-gpu
+  - torchvision
+  - cupy            # GPU backend of the own NumPy network (digits.numpy_net, --device gpu)
+  - numpy
+  - scikit-learn
+  - pandas
+  - pyarrow
+  - pyyaml
+  - python-dotenv
+  - matplotlib-base   # report figures (digits.figures)
+  # workbench
+  - fastapi
+  - uvicorn
+  - python-multipart   # form posts in the workbench (review queue, curation)
+  - jinja2
+  - nvidia-ml-py
+  - pillow
+  # dev
+  - pytest
+  - httpx
+  - ruff
+  - pre-commit
+  - hatchling

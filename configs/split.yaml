@@ -1,0 +1,10 @@
+# Fixed stratified validation split from the training set (see plan 5.3)
+# Regenerate with: micromamba run -n mnist-showcase python scripts/make_split.py
+seed: 20261028
+n_train: 54000
+n_val: 6000
+val_ids_file: configs/split_val_ids.txt
+# Stratified folds over all 60 000 training images for out-of-fold predictions (plan 10.2, D18)
+cv_folds: 5
+cv_seed: 20261029
+cv_folds_file: configs/cv_folds.txt   # "<sample id> <fold>" per line

@@ -1,0 +1,45 @@
+[project]
+name = "digits"
+version = "0.0.1"
+description = "MNIST showcase: NumPy network from scratch, PyTorch CNN, label curation"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy",
+    "torch",
+    "torchvision",
+    "scikit-learn",
+    "pyyaml",
+    "pandas",
+    "pyarrow",
+    "python-dotenv",
+    "pillow",   # samples/augmented.png (digits.samples)
+]
+
+[project.optional-dependencies]
+gpu = ["cupy"]   # --device gpu for the own NumPy network
+report = ["matplotlib"]   # figures for reports/report.tex (digits.figures)
+
+[project.scripts]
+train = "digits.train:main"
+
+[dependency-groups]
+dev = ["pytest", "ruff", "pre-commit"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/digits"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,10 @@
+model: cnn_small   # conv(32)-conv(64)-pool-dropout-fc(128)-fc(10)
+model_args: {dropout: 0.25}
+optimizer: {name: adam, lr: 1.0e-3}
+batch_size: 256
+normalize: {mean: 0.1307, std: 0.3081}   # training-set pixel mean/std (tests/test_data.py)
+log_every: 50
+epochs: 15
+amp: true
+seed: 0
+weight_delta: {every: 100, lags: [100, 500]}   # log sum |w - w_lag_steps_ago| (D8)

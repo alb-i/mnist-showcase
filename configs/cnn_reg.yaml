@@ -1,0 +1,14 @@
+model: cnn_reg     # 2 x (2 x conv3x3-BN-ReLU, pool, dropout), fc(128)-BN-ReLU-dropout, fc(10)
+model_args: {dropout_conv: 0.1, dropout_fc: 0.3}
+optimizer: {name: adamw, lr: 3.0e-3, weight_decay: 5.0e-4}
+scheduler: onecycle   # max lr = optimizer lr, stepped per batch
+label_smoothing: 0.1
+augment: {rotation_deg: 10, shift_px: 2, scale: [0.9, 1.1]}
+batch_size: 256
+normalize: {mean: 0.1307, std: 0.3081}   # training-set pixel mean/std (tests/test_data.py)
+log_every: 50
+epochs: 30
+early_stopping_patience: 5
+amp: true
+seed: 0
+weight_delta: {every: 100, lags: [100, 500]}   # log sum |w - w_lag_steps_ago| (D8)
